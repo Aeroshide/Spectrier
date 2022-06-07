@@ -1,25 +1,22 @@
-package me.duncanruns.autoreset.mixin;
+package com.aeroshide.spectrier.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import me.duncanruns.autoreset.AutoReset;
+import com.aeroshide.spectrier.AutoReset;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.screen.world.CreateWorldScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Text;
+import net.minecraft.text.*;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Random;
-
 @Mixin(TitleScreen.class)
 public abstract class TitleScreenMixin extends Screen {
-    private static final Identifier GOLD_BOOTS = new Identifier("textures/item/golden_boots.png");
+    private static final Identifier GOLD_BOOTS = new Identifier("textures/item/netherite_boots.png");
     private ButtonWidget resetsButton;
     private Text difficultyString;
 
@@ -31,15 +28,15 @@ public abstract class TitleScreenMixin extends Screen {
     private void initMixin(CallbackInfo info) {
         // If auto reset mode is on, instantly switch to create world menu.
         if (AutoReset.isPlaying) {
-            client.setScreen(CreateWorldScreen.create(this));
+            CreateWorldScreen.create(this.client, this);
         } else if (!this.client.isDemo()) {
             // Add new button for starting auto resets.
             int y = this.height / 4 + 48;
-            resetsButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 124, y, 20, 20, new LiteralText(""), (buttonWidget) -> {
+            resetsButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 124, y, 20, 20, Text.literal(""), (buttonWidget) -> {
                 if (!hasShiftDown()) {
                     AutoReset.isPlaying = true;
                     AutoReset.saveDifficulty();
-                    client.setScreen(CreateWorldScreen.create(this));
+                    CreateWorldScreen.create(this.client, this);
                 } else {
                     AutoReset.difficulty++;
                     if (AutoReset.difficulty > 4) {
@@ -56,19 +53,19 @@ public abstract class TitleScreenMixin extends Screen {
     private void refreshDifficultyString() {
         switch (AutoReset.difficulty) {
             case 0:
-                difficultyString = new LiteralText("Peaceful");
+                difficultyString = Text.literal("Peaceful");
                 break;
             case 1:
-                difficultyString = new LiteralText("Easy");
+                difficultyString = Text.literal("Easy");
                 break;
             case 2:
-                difficultyString = new LiteralText("Normal");
+                difficultyString = Text.literal("Normal");
                 break;
             case 3:
-                difficultyString = new LiteralText("Hard");
+                difficultyString = Text.literal("Hard");
                 break;
             case 4:
-                difficultyString = new LiteralText("Hardcore");
+                difficultyString = Text.literal("Hardcore");
                 break;
         }
     }

@@ -1,6 +1,6 @@
-package me.duncanruns.autoreset.mixin;
+package com.aeroshide.spectrier.mixin;
 
-import me.duncanruns.autoreset.AutoReset;
+import com.aeroshide.spectrier.AutoReset;
 import net.minecraft.client.gui.screen.world.CreateWorldScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.world.Difficulty;

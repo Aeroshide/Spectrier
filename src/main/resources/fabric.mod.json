@@ -2,10 +2,11 @@
   "schemaVersion": 1,
   "id": "autoreset",
   "version": "${version}",
-  "name": "Auto Reset Mod",
-  "description": "yooo",
+  "name": "Spectrier",
+  "description": "hasbi asked me for this, hes a gay",
   "authors": [
-    "DuncanRuns"
+    "DuncanRuns (Original)",
+    "Aeroshide (Spectrier fork)"
   ],
   "contributors": [],
   "contact": {},
@@ -14,7 +15,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "me.duncanruns.autoreset.AutoReset"
+      "com.aeroshide.spectrier.AutoReset"
     ],
     "client": [],
     "server": []
@@ -23,6 +24,7 @@
     "autoreset.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.10.0"
+    "fabricloader": ">=0.10.0",
+    "minecraft": "1.19"
   }
 }

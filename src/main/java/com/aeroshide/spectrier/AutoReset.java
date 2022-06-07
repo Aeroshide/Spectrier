@@ -1,4 +1,4 @@
-package me.duncanruns.autoreset;
+package com.aeroshide.spectrier;
 
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.Level;
